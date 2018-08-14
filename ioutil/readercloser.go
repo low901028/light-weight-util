@@ -1,8 +1,8 @@
 package ioutil
 
 import (
-	"io"
 	"fmt"
+	"io"
 )
 
 // ReaderAndCloser实现io.ReadCloser同时实现reader和closer
@@ -10,7 +10,6 @@ type ReaderAndCloser struct {
 	io.Reader
 	io.Closer
 }
-
 
 var (
 	ErrShortRead = fmt.Errorf("ioutil: short read")
@@ -27,7 +26,7 @@ type exactReadCloser struct {
 	totalBytes int64
 }
 
-func (e *exactReadCloser) Read(p []byte) (int, error){
+func (e *exactReadCloser) Read(p []byte) (int, error) {
 	n, err := e.rc.Read(p)
 	e.br += int64(n)
 	if e.br > e.totalBytes {
@@ -39,12 +38,12 @@ func (e *exactReadCloser) Read(p []byte) (int, error){
 	return n, err
 }
 
-func (e *exactReadCloser) Close() error{
-	if err := e.rc.Close(); err != nil{
+func (e *exactReadCloser) Close() error {
+	if err := e.rc.Close(); err != nil {
 		return err
 	}
 
-	if e.br < e.totalBytes{
+	if e.br < e.totalBytes {
 		return ErrShortRead
 	}
 	return nil

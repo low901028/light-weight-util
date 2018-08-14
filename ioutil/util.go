@@ -2,8 +2,8 @@ package ioutil
 
 import (
 	"io"
-	"os"
 	"light-weight-util/fileutil"
+	"os"
 )
 
 // WriteAndSyncFile与标准库中ioutil.WriteFile功能类似：WriteAndSyncFile在关闭文件前调用同步

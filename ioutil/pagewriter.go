@@ -59,6 +59,7 @@ func (pw *PageWriter) Write(p []byte) (n int, err error) {
 		return n, nil
 	}
 
+	// 当write的bytes超过page bytes 采用直接写
 	if len(p) > pw.pageBytes { // 直接写
 		pages := len(p) / pw.pageBytes
 		c, werr := pw.w.Write(p[:pages*pw.pageBytes])
